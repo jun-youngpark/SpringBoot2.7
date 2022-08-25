@@ -18,15 +18,16 @@ public class CityController {
     public ResponseEntity<?> save(@RequestBody City city) {
         cityService.save(City.builder()
                                 .name(city.getName())
-                                .state("R").build()
+                                .state(city.getState()).build()
         );
 
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-    @GetMapping`("/get/")
-    public ResponseEntity<?> get(@RequestBody City city) {
-        List<City> list= cityService.get(city.getId());
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> get(@PathVariable int id) {
+        List<City> list= cityService.get(id);
+        System.out.println(list);
         return new ResponseEntity<List<City>>(list,HttpStatus.OK);
     }
 
