@@ -3,10 +3,7 @@ package com.jyp.product.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ public class CityController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-    @PostMapping("/get/")
+    @GetMapping`("/get/")
     public ResponseEntity<?> get(@RequestBody City city) {
         List<City> list= cityService.get(city.getId());
         return new ResponseEntity<List<City>>(list,HttpStatus.OK);
