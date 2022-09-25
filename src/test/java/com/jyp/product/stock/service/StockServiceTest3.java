@@ -1,6 +1,7 @@
 package com.jyp.product.stock.service;
 
 import com.jyp.product.stock.domain.Stock;
+import com.jyp.product.stock.facade.OptimisticStockFacade;
 import com.jyp.product.stock.repository.StockRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +16,10 @@ import java.util.concurrent.Executors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class StockServiceTest {
+class StockServiceTest3 {
 
     @Autowired
-    private StockService stockService;
+    private OptimisticStockFacade stockService;
 
     @Autowired
     private StockRepository stockRepository;
@@ -36,7 +37,7 @@ class StockServiceTest {
     }
 
     @Test
-    public void decrease_test() {
+    public void decrease_test() throws  InterruptedException{
         stockService.decrease(1L, 1L);
 
         Stock stock = stockRepository.findById(1L).orElseThrow();
@@ -54,7 +55,11 @@ class StockServiceTest {
         for (int i = 0; i < threadCount; i++) {
             executorService.submit(() -> {
                 try {
-                    stockService.decrease(1L, 1L);
+                    try {
+                        stockService.decrease(1L, 1L);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 } finally {
                     latch.countDown();
                 }
