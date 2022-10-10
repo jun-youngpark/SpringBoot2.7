@@ -14,6 +14,12 @@ public class RedisLockRepository {
         this.redisTemplate = redisTemplate;
     }
 
+    public Boolean save(String key,String value) {
+        return redisTemplate
+                .opsForValue()
+                .setIfAbsent(key, value, Duration.ofMillis(3_000));
+    }
+
     public Boolean lock(Long key) {
         return redisTemplate
                 .opsForValue()

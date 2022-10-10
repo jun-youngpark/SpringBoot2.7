@@ -1,7 +1,7 @@
 package com.jyp.product.stock.service;
 
 import com.jyp.product.stock.domain.Stock;
-import com.jyp.product.stock.facade.OptimisticStockFacade;
+import com.jyp.product.stock.facade.RedisLettuceLockStockFacade;
 import com.jyp.product.stock.repository.StockRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,10 +16,10 @@ import java.util.concurrent.Executors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class StockServiceTest3 {
+class RedistLockServiceTest {
 
     @Autowired
-    private OptimisticStockFacade stockService;
+    private RedisLettuceLockStockFacade stockService;
 
     @Autowired
     private StockRepository stockRepository;
