@@ -1,7 +1,8 @@
 package com.jyp.product.stock.domain;
- ;
 
 import javax.persistence.*;
+
+;
 
 @Entity
 public class Stock {
